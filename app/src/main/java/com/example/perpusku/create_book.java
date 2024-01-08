@@ -34,11 +34,11 @@ public class create_book extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_book);
-        
+
         db = new DatabaseHelper(this);
         btnTambah = findViewById(R.id.buttonSave);
         bookImage = findViewById(R.id.bookImage);
-        
+
         // Register ActivityResultLauncher
         pickImageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -60,13 +60,13 @@ public class create_book extends AppCompatActivity {
             String desc = sinopsis.getText().toString();
 
             if (imageUri != null) {
-                long insertedId = db.addUser(judul, author, "", desc);
+                long insertedId = db.addBook(judul, author, "", desc);
 
                 if (insertedId != -1) {
                     String imagePath = saveImageToInternalStorage(imageUri, "user_" + insertedId + ".png");
 
                     if (imagePath != null) {
-                        boolean updated = db.updateUserImage(insertedId, imagePath);
+                        boolean updated = db.updateImagePath(insertedId, imagePath);
 
                         if (updated) {
                             Toast.makeText(create_book.this, "User Added", Toast.LENGTH_SHORT).show();
@@ -115,4 +115,3 @@ public class create_book extends AppCompatActivity {
         return null;
     }
 }
-

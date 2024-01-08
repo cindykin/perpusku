@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bookImage"
         android:textSize="10dp"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         android:text="Klik gambar untuk menambahkan/mengganti gambar">
     </TextView>

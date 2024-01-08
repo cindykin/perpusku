@@ -25,7 +25,7 @@
 
     <ImageView
         android:id="@+id/bookImage"
-        android:layout_width="200dp"
+        android:layout_width="160dp"
         android:layout_height="200dp"
         android:src="@drawable/default_book_image"
         android:scaleType="centerCrop"
@@ -58,7 +58,7 @@
         android:layout_marginTop="32dp"/>
 
     <EditText
-        android:id="@+id/bookText"
+        android:id="@+id/bookName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/book"
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Penulis"
-        android:layout_below="@id/bookText"
+        android:layout_below="@id/bookName"
         android:textSize="20sp"
         android:layout_alignParentStart="true"
         android:paddingStart="24dp"
