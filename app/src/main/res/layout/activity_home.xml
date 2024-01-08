@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:layout_centerVertical="true">
+
+    <TextView
+        android:id="@+id/textViewMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Untuk melanjutkan, silahkan pilih terlebih \n dahulu menu yang diinginkan"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/btnToMember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List Pengguna/Member"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#1976D2"
+        android:elevation="4dp"
+        android:layout_below="@id/textViewMessage"
+        android:layout_marginTop="32dp"/>
+
+    <Button
+        android:id="@+id/btnToHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List Riwayat Peminjaman"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/teal_700"
+        android:elevation="4dp"
+        android:layout_below="@id/btnToMember"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnToBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List Buku"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/purple_500"
+        android:elevation="4dp"
+        android:layout_below="@id/btnToHistory"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>
