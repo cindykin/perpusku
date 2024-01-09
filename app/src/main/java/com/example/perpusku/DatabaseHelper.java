@@ -236,15 +236,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowsAffected > 0; // Return true if deletion was successful
     }
 
-    public boolean addHistory(int bookId, int userId, String borrowDate, String returnDate) {
+    public long addHistory(int bookId, int userId, String borrowDate, String returnDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_BOOK_ID, bookId);
         values.put(COLUMN_USER_ID, userId);
         values.put(COLUMN_BORROW_DATE, borrowDate);
         values.put(COLUMN_RETURN_DATE, returnDate);
-        long result = db.insert(TABLE_HISTORY, null, values);
-        return result != -1; // Check if insertion was successful
+        return db.insert(TABLE_HISTORY, null, values);
     }
 
     public Cursor getAllHistoryRecords() {
@@ -252,18 +251,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.query(TABLE_HISTORY, null, null, null, null, null, null);
     }
 
-    public boolean updateHistoryRecord(int historyId, int bookId, int userId, String borrowDate, String returnDate) {
+    public boolean updateHistoryRecord(int historyId, String borrowDate, String returnDate, int bookId, int userId, String imagePath) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_BOOK_ID, bookId);
         values.put(COLUMN_USER_ID, userId);
         values.put(COLUMN_BORROW_DATE, borrowDate);
         values.put(COLUMN_RETURN_DATE, returnDate);
+        // Add your logic to handle imagePath (if needed)
+
         String whereClause = COLUMN_ID + "=?";
-        String[] whereArgs = { String.valueOf(historyId) };
+        String[] whereArgs = {String.valueOf(historyId)};
         int rowsAffected = db.update(TABLE_HISTORY, values, whereClause, whereArgs);
         return rowsAffected > 0; // Return true if update was successful
     }
+
 
     public boolean deleteHistoryRecord(int historyId) {
         SQLiteDatabase db = this.getWritableDatabase();

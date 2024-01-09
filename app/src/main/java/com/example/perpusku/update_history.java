@@ -115,7 +115,7 @@ public class update_history extends AppCompatActivity {
             String imagePath = saveImageToInternalStorage(imageUri, "history_" + id_history + ".png");
 
             if (imagePath != null) {
-                boolean isUpdated = db.updateHistoryRecord(Integer.parseInt(id_history), updatedBorrowDate, updatedReturnDate, updatedBookId, updatedUserId, imagePath);
+                boolean isUpdated = db.updateHistoryRecord(Integer.parseInt(id_history), updatedBorrowDate, updatedReturnDate, Integer.parseInt(updatedBookId), Integer.parseInt(updatedUserId), imagePath);
 
                 if (isUpdated) {
                     Toast.makeText(update_history.this, "History Updated", Toast.LENGTH_SHORT).show();

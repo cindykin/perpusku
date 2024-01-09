@@ -55,10 +55,14 @@ public class create_history extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Retrieve other input fields if needed
-                String bookId = ((TextInputEditText) findViewById(R.id.id_book)).getText().toString();
-                String userId = ((TextInputEditText) findViewById(R.id.id_user)).getText().toString();
+                String bookIdStr = ((TextInputEditText) findViewById(R.id.id_book)).getText().toString();
+                String userIdStr = ((TextInputEditText) findViewById(R.id.id_user)).getText().toString();
                 String borrowDate = tanggalPinjam.getText().toString();
                 String returnDate = tanggalKembali.getText().toString();
+
+                // Convert bookId and userId to integers
+                int bookId = Integer.parseInt(bookIdStr);
+                int userId = Integer.parseInt(userIdStr);
 
                 // Add your logic to save the history data to the database
                 long insertedId = db.addHistory(bookId, userId, borrowDate, returnDate);
