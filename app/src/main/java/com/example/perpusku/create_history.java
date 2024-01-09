@@ -26,14 +26,14 @@ import java.util.Calendar;
 import java.util.Locale;
 import com.google.android.material.textfield.TextInputEditText;
 
+
 public class create_history extends AppCompatActivity {
+
     private DatabaseHelper db;
     private TextInputEditText tanggalPinjam;
     private TextInputEditText tanggalKembali;
     private SimpleDateFormat dateFormatter;
     private Button btnTambah;
-    private ActivityResultLauncher<Intent> pickImageLauncher;
-    private ImageView bookImage;
 
     // Your existing code...
 
@@ -44,7 +44,6 @@ public class create_history extends AppCompatActivity {
 
         db = new DatabaseHelper(this);
         btnTambah = findViewById(R.id.buttonSave);
-        bookImage = findViewById(R.id.bookImage);
 
         tanggalPinjam = findViewById(R.id.tanggalPinjam);
         tanggalKembali = findViewById(R.id.tanggalKembali);
@@ -52,21 +51,51 @@ public class create_history extends AppCompatActivity {
         // Initialize date picker
         initializeDatePicker();
 
-        // Your existing code...
+        btnTambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Retrieve other input fields if needed
+                String bookId = ((TextInputEditText) findViewById(R.id.id_book)).getText().toString();
+                String userId = ((TextInputEditText) findViewById(R.id.id_user)).getText().toString();
+                String borrowDate = tanggalPinjam.getText().toString();
+                String returnDate = tanggalKembali.getText().toString();
+
+                // Add your logic to save the history data to the database
+                long insertedId = db.addHistory(bookId, userId, borrowDate, returnDate);
+
+                if (insertedId != -1) {
+                    Toast.makeText(create_history.this, "History Added", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(create_history.this, list_history.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(create_history.this, "Failed to add history", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     // Add the following methods
 
     private void initializeDatePicker() {
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        tanggalPinjam.setOnClickListener(view -> showDatePickerDialog(tanggalPinjam));
-        tanggalKembali.setOnClickListener(view -> showDatePickerDialog(tanggalKembali));
+        tanggalPinjam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog(tanggalPinjam);
+            }
+        });
+        tanggalKembali.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog(tanggalKembali);
+            }
+        });
     }
 
     private void showDatePickerDialog(final TextInputEditText editText) {
         Calendar newCalendar = Calendar.getInstance();
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                create_history.this, // Use the correct reference to your activity
+                create_history.this,
                 (DatePicker datePicker, int year, int month, int day) -> {
                     Calendar selectedDate = Calendar.getInstance();
                     selectedDate.set(year, month, day);

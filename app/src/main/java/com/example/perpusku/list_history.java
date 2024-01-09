@@ -1,16 +1,15 @@
 package com.example.perpusku;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -19,34 +18,37 @@ public class list_history extends AppCompatActivity {
     private Button btnTambah;
     private RecyclerView recyclerView;
     private DatabaseHelper db;
-    private ArrayList<String> id_buku, title, author, sinopsis, imgPaths;
+    private ArrayList<String> id_history, borrowDate, returnDate, bookId, userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_history);
+
         btnTambah = findViewById(R.id.btnTambah);
         recyclerView = findViewById(R.id.recycler_view);
         db = new DatabaseHelper(this);
 
-        id_buku = new ArrayList<>();
-        title = new ArrayList<>();
-        author = new ArrayList<>();
-        sinopsis = new ArrayList<>();
-        imgPaths = new ArrayList<>();
+        id_history = new ArrayList<>();
+        borrowDate = new ArrayList<>();
+        returnDate = new ArrayList<>();
+        bookId = new ArrayList<>();
+        userId = new ArrayList<>();
 
-        bookAdapter bk = new bookAdapter(
+        historyAdapter historyAdapter = new historyAdapter(
                 list_history.this,
-                id_buku,
-                title,
-                author,
-                imgPaths,
-                sinopsis
+                id_history,
+                borrowDate,
+                returnDate,
+                bookId,
+                userId
         );
 
-        recyclerView.setAdapter(bk);
+        recyclerView.setAdapter(historyAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(list_history.this));
-        storeDataToArray();
+
+        storeHistoryDataToArray();
+
         btnTambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,23 +58,23 @@ public class list_history extends AppCompatActivity {
         });
     }
 
-    void storeDataToArray() {
+    void storeHistoryDataToArray() {
         try {
-            Cursor cursor = db.getAllBooks();
+            Cursor cursor = db.getAllHistoryRecords();
             if (cursor.getCount() == 0) {
-                Toast.makeText(list_history.this, "Data belum ada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(list_history.this, "History data is empty", Toast.LENGTH_SHORT).show();
             } else {
                 while (cursor.moveToNext()) {
-                    id_buku.add(cursor.getString(0));
-                    title.add(cursor.getString(1));
-                    author.add(cursor.getString(2));
-                    imgPaths.add(cursor.getString(3)); // Fetch image paths from the database
-                    sinopsis.add(cursor.getString(4));
+                    id_history.add(cursor.getString(0));
+                    borrowDate.add(cursor.getString(1));
+                    returnDate.add(cursor.getString(2));
+                    bookId.add(cursor.getString(3));
+                    userId.add(cursor.getString(4));
                 }
                 cursor.close();
             }
         } catch (Exception e) {
-            Toast.makeText(list_history.this, "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(list_history.this, "Error retrieving history data", Toast.LENGTH_SHORT).show();
         }
     }
 }
