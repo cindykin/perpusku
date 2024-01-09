@@ -1,9 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".update_history">
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Data"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:layout_gravity="start"
+            android:paddingLeft="12dp"
+            android:textStyle="bold"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/bookImage"
+        android:layout_width="160dp"
+        android:layout_height="200dp"
+        android:src="@drawable/default_book_image"
+        android:scaleType="centerCrop"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/toolbar"
+        android:contentDescription="Book Picture"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bookImage"
+        android:textSize="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Klik gambar untuk menambahkan/mengganti gambar">
+    </TextView>
+
+    <TextView
+        android:id="@+id/book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kode Buku"
+        android:layout_below="@id/bookImage"
+        android:textSize="20sp"
+        android:layout_alignParentStart="true"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp"
+        android:layout_marginTop="32dp"/>
+
+    <EditText
+        android:id="@+id/id_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book"
+        android:hint="Input Kode Buku"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:paddingTop="16dp" />
+
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID User"
+        android:layout_below="@id/id_book"
+        android:textSize="20sp"
+        android:layout_alignParentStart="true"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp"/>
+
+    <EditText
+        android:id="@+id/id_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user"
+        android:hint="Input ID User yang meminjam buku"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:paddingTop="16dp" />
+
+    <!-- Date Pickers Layout -->
+    <LinearLayout
+        android:id="@+id/datePickersLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_user"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp">
+
+        <!-- Tanggal Pinjam -->
+        <RelativeLayout
+            android:id="@+id/layoutTanggalPinjam"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Tanggal Pinjam:"
+                android:textSize="16sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tanggalPinjamLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingTop="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tanggalPinjam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:background="?android:attr/selectableItemBackground"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
+
+        <!-- Tanggal Kembali -->
+        <RelativeLayout
+            android:id="@+id/layoutTanggalKembali"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Tanggal Kembali:"
+                android:textSize="16sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tanggalKembaliLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingTop="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tanggalKembali"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:background="?android:attr/selectableItemBackground"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="Simpan"
+        android:layout_below="@id/datePickersLayout"
+        android:layout_marginTop="24dp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
