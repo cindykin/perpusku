@@ -68,7 +68,7 @@ public class create_member extends AppCompatActivity {
                         boolean updated = db.updateUserImage(insertedId, imagePath);
 
                         if (updated) {
-                            Toast.makeText(create_member.this, "User Added", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(create_member.this, "Book Added", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(create_member.this, list_member.class);
                             startActivity(intent);
                         } else {

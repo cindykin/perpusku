@@ -71,10 +71,11 @@ public class list_member extends AppCompatActivity {
                 while (cursor.moveToNext()) {
                     id_user.add(cursor.getString(0));
                     username.add(cursor.getString(1));
-                    email.add(cursor.getString(2));
-                    password.add(cursor.getString(3)); // Fetch password from the database
-                    imgPaths.add(cursor.getString(4)); // Fetch image paths from the database
+                    password.add(cursor.getString(2));
+                    email.add(cursor.getString(3));
+                    imgPaths.add(cursor.getString(4));
                 }
+
                 cursor.close();
             }
         } catch (Exception e) {
